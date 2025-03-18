@@ -5,9 +5,9 @@
  * 알림메시지 구조체를 정의한다.
  *
  * @file /modules/push/dtos/Message.php
- * @author Arzz <arzz@arzz.com>
+ * @author sungjin <esung246@naddle.net>
  * @license MIT License
- * @modified 2024. 10. 11.
+ * @modified 2025. 3. 18.
  */
 namespace modules\push\dtos;
 class Message
@@ -80,7 +80,7 @@ class Message
     public function __construct(object $message)
     {
         $this->_message_id = $message->message_id = null;
-        $this->_member_id = $message->member_id = $message->member_id;
+        $this->_member_id = $message->member_id;
         $this->_component_type = $message->component_type;
         $this->_component_name = $message->component_name;
         $this->_target_type = $message->target_type;
