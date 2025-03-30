@@ -73,6 +73,11 @@ class Sender
     private \modules\push\dtos\Message $_message;
 
     /**
+     * @var string $_type 발송타입
+     */
+    private string $_type;
+
+    /**
      * 알림 전송자 클래스를 정의한다.
      *
      * @param \Component $component 알림을 전송하는 컴포넌트 객체
@@ -147,6 +152,26 @@ class Sender
         $this->_code = $code;
         $this->_content = $content;
         return $this;
+    }
+
+    /**
+     * 발송타입을 가져온다.
+     *
+     * @param string $type 발송타입
+     */
+    public function getType(): string
+    {
+        return $this->_type;
+    }
+
+    /**
+     * 발송타입을 설정한다.
+     *
+     * @param string $type 발송타입
+     */
+    public function setType(string $type): void
+    {
+        $this->_type = $type;
     }
 
     /**
@@ -253,6 +278,7 @@ class Sender
                         'sended_at' => $sended_at,
                         'is_checked' => 'FALSE',
                         'is_readed' => 'FALSE',
+                        'type' => $this->_type,
                     ])
                     ->execute();
             }
