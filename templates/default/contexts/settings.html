@@ -1,0 +1,50 @@
+<?php
+/**
+ * 이 파일은 아이모듈 알림모듈의 일부입니다. (https://www.imodules.io)
+ *
+ * 기본 템플릿 - 알림수신채널 설정
+ *
+ * @file /modules/push/templates/default/contexts/settings.html
+ * @author Arzz <arzz@arzz.com>
+ * @license MIT License
+ * @modified 2024. 11. 6.
+ *
+ * @var \modules\push\Push $me
+ * @var \modules\push\dtos\Code[] $codes
+ */
+if (defined('__IM__') == false) {
+    exit();
+}
+?>
+<ul data-role="table" class="black inner">
+    <li class="thead">
+        <span class="title">알림종류</span>
+        <span class="channel">
+            <div>웹</div>
+        </span>
+        <span class="channel">
+            <div>모바일</div>
+        </span>
+        <span class="channel">
+            <div>이메일</div>
+        </span>
+    </li>
+    <?php
+    $latestComponent = null;
+    foreach ($codes as $code) {
+        if (
+            $latestComponent?->getType() != $code->getComponent()->getType() ||
+            $latestComponent?->getName() != $code->getComponent()->getName()
+        ) {
+            $latestComponent = $code->getComponent();
+            echo '<li class="group">' . $code->getComponent()->getTitle() . '</li>';
+        }
+    ?>
+    <li>
+        <span class="title"><?php echo $code->getTitle(); ?></span>
+        <span class="channel">
+            <?php Form::check($code->getCode(true), 'WEB')->doLayout(); ?>
+        </span>
+    </li>
+    <?php } ?>
+</ul>
